@@ -66,8 +66,8 @@ def data_update(request):
     from machine import Pin, Timer
     import time
 
-    trig_pin = Pin(21, Pin.OUT)  
-    echo_pin = Pin(22, Pin.IN)   
+    trig_pin = Pin(17, Pin.OUT)  
+    echo_pin = Pin(16, Pin.IN)   
 
     trig_pin.low()
     time.sleep_us(2)
@@ -87,11 +87,14 @@ def data_update(request):
     distance = 0
     d = 0
     while  d <=10 :  
-        distance += (duration /58)
+        distance += (duration / 58)
         d = d +1 
     distance = distance / 10
+    if distance > 25:
+        distance = 25
     print(distance)
-    return { "Distance" : distance/2}
+    return { "Distance" : distance/1.7}
+
 # Programa principal, verifico que el archivo sea el main.py
 if __name__ == "__main__":
     
